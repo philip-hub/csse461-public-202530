@@ -30,3 +30,15 @@ As the box's focal distance gets larger the camera captures a more narrow image.
 <br>
 <li><p>Given a 3-channel color image with width <code>width</code> and height <code>height</code> stored in a 3-dimensional array <code>F</code>, write pseudocode to give the image a reddish tint. Assume that <code>F[r, c, i]</code> is the syntax to access the value of the <code>i</code>th color channel (where 0 is red, 1 is green, 2 is blue) of the pixel at the <code>r</code>th row and <code>c</code>th column. Your answer can, but does not need to involve any color space transformations.</p></li>
 
+
+```python
+beans = imageio.imread("../data/beans.jpg") #load beans
+beans = util.byte2float(beans) #normalize rgb values from 0-255 to 0.0-1.0
+beans[:,:,0] = beans[:,:,0]*1.5 # beans is equal to beans with the red column multipled by 1.5 to make it more red
+plt.imshow(beans.clip(0-1)) #show beans
+```
+
+*Sources*: Visited Dr. Wilson for asstistance in office hours. Used the chat gpt promopt: "how to make a code block in markdown" as I forgot
+
+
+

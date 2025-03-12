@@ -28,6 +28,7 @@ Lowest to highest<br>
 <img src="hw1 p2.jpeg">
 As the box's focal distance gets larger the camera captures a more narrow image. As the box gets smaller the camera captures a less narrow image.
 <br>
+
 <li><p>Given a 3-channel color image with width <code>width</code> and height <code>height</code> stored in a 3-dimensional array <code>F</code>, write pseudocode to give the image a reddish tint. Assume that <code>F[r, c, i]</code> is the syntax to access the value of the <code>i</code>th color channel (where 0 is red, 1 is green, 2 is blue) of the pixel at the <code>r</code>th row and <code>c</code>th column. Your answer can, but does not need to involve any color space transformations.</p></li>
 
 
@@ -38,7 +39,48 @@ beans[:,:,0] = beans[:,:,0]*1.5 # beans is equal to beans with the red column mu
 plt.imshow(beans.clip(0-1)) #show beans
 ```
 
-*Sources*: Visited Dr. Wilson for asstistance in office hours. Used the chat gpt promopt: "how to make a code block in markdown" as I forgot
+*Sources*: Visited Dr. Wilson for asstistance in office hours. I aslo used the chat gpt promopt: "how to make a code block in markdown" as I forgot
+
+<li><p>Suppose you want to make a color image represented in RGB more saturated, but without allowing any pixel values to go outside the range from 0 to 1. Write pseudocode (or python code) to implement this.</p></li>
+
+
+
+```python
+beans = imageio.imread("../data/beans.jpg") #load beans
+beans = util.byte2float(beans) #normalize rgb values from 0-255 to 0.0-1.0
+beans[:,:,0] = beans[:,:,:]*1.5 # saturate all the colors
+plt.imshow(beans.clip(0-1)) #show beans
+```
+*Sources:* Chat Gpt prompt: "how does image saturation work"
+
+
+<li><p>Given a grayscale image <span class="math inline">\(f(x, y)\)</span>, how could you increase the <em>contrast</em>? In other words, how could you make the bright stuff brighter and dark stuff darker? As above, your approach should not allow values to go outside their original range from 0 to 1.</p></li>
+
+
+Yes this is possible by using thresholding which is defined as
+
+
+$$
+h(x, y) = 
+\begin{cases}
+0 \textrm{ if } f(x, y) < t\\
+1 \textrm{ if } f(x, y) \ge t\\
+\end{cases}
+$$
+
+Therefore on gray image any number below the threshold will be white and above the threshold would be black.
+
+Here is an example of the code:
+
+```python
+beans_gray = skim.color.rgb2gray(beans)
+thresh = .5
+# implement filtering.threshold
+g = filtering.threshold(beans_gray, thresh)
+plt.imshow(g, cmap="gray")
+```
+
+<li><p>In terms of an input image <span class="math inline">\(f(x, y)\)</span>, write a mathematical expression for a new image <span class="math inline">\(g\)</span> that is shifted four pixels to the left.</p></li>
 
 
 

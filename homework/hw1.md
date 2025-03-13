@@ -82,5 +82,18 @@ plt.imshow(g, cmap="gray")
 
 <li><p>In terms of an input image <span class="math inline">\(f(x, y)\)</span>, write a mathematical expression for a new image <span class="math inline">\(g\)</span> that is shifted four pixels to the left.</p></li>
 
+If the image is represented by 2 column vectors X, Y and a RGB matrix of 3 by the number of pixels in the image, the mathmatical expression for the image would be f(x,y,rgb). To shift the image 4 pixels to the left we would do f(x-4,y,rgb). Addtional processing would be required to get rid of the X and Y coordinates that corespond to values of X that are now below 0. 
 
 
+<li><p>In terms of an input image <span class="math inline">\(f(x, y)\)</span>, write a mathematical expression for a new image <span class="math inline">\(g\)</span> that is twice as big (i.e., larger by a factor of two in both <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>).</p></li>
+
+If the image is represented by 2 column vectors X, Y and a RGB matrix of 3 by the number of pixels in the image, the mathmatical expression for the image would be f(x,y,rgb). For this operation to work, We would need to f(x+2*x,y+2*x,rgb) and then double every entry in the RGB column.
+
+<li><p>For each of Problems 2 through 7, determine whether the transformation described is geometric or photometric.</p></li>
+
+2. geometric
+3. geometric
+4. geometric
+5. photometric
+6. geometric
+7. geometric

@@ -87,6 +87,7 @@ def down_2x(img):
     Use prefiltering to avoid aliasing. 
     Pre: img is grayscale (2d) """
     # TODO: prefiltering
+    img = separable_filter(img, gauss1d5)
     return img[::2,::2]
 
 def down_4x(img):

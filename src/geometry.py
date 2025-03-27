@@ -17,6 +17,13 @@ def warp(img, tx, dsize=None):
     """ Warp img using tx, a matrix representing a geometric transformation.
     Pre: tx is 3x3 (or some upper-left slice of a 3x3 matrix). img is grayscale.
     Returns: an output image of shape dsize with the warped img"""
+
+    # not a greyscale image
+    if len(img.shape) > 2 and img.shape[2] > 1:
+        # color: call this function per-channel
+        out = np.stack([warp(img[:,:,i], tx, dsize) for i in range(img.shape[2])], axis=2)
+        return out
+    
     H, W = img.shape[:2]
 
     # turn a 2x2 or 2x3 tx into a full 3x3 matrix

@@ -64,11 +64,11 @@ def extract_MOPS(img, point):
         [0, 0, 1]], dtype=np.float32)
 
     # compose the transformations and warp the image into a 5x5 output image
-    M = tx2 @ rot @ scale @ tx1 # TODO - compose all the transformations
+    M = tx2 @ rot @ scale @ tx1 # compose all the transformations
     
     desc = geometry.warp(img, M[:2,:], dsize=(5, 5))
 
-    # TODO: standardize intensity values
+    # standardize intensity values
     desc -= desc.mean()
     desc /= desc.std()
     
@@ -148,7 +148,7 @@ def visualize_harris(img, i, j, topdown=True, window_halfwidth=3, error_surface_
     ax = plt.subplot(2, 2, 2, projection='3d', title="E(u,v) actual")
     X, Y = np.meshgrid(range(-uv_k, uv_k + 1), range(-uv_k, uv_k + 1))
     ax.set_proj_type('ortho')
-    ax.plot_surface(X, Y, e_true, cmap=cm.coolwarm)
+    ax.plot_surface(Y, X, e_true, cmap=cm.coolwarm)
     ax.set_zlim(0, 4)
     if topdown:
         ax.view_init(elev=90, azim=0)   
@@ -179,7 +179,7 @@ def visualize_harris(img, i, j, topdown=True, window_halfwidth=3, error_surface_
 
     # X, Y = np.meshgrid(range(-uv_k, uv_k + 1), range(-uv_k, uv_k + 1))
     # ax.set_proj_type('ortho')
-    ax.contour(e_approx, cmap=cm.coolwarm)
+    ax.contour(e_approx.T, cmap=cm.coolwarm)
 
     # ax.contour(X, Y, e_approx, cmap=cm.coolwarm)
     # ax.set_zlim(0, 10)

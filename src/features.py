@@ -33,7 +33,7 @@ def get_harris_points(harris_mask):
     i, j = np.nonzero(harris_mask)
     return np.vstack((i, j))
 
-def extract_MOPS(img, point):
+def extract_MOPS(img, point, grad=None):
     """ point is in (j, i) format so it can be treated as (x, y) with origin
     in the top left """
     # translate center patch to origin
@@ -50,7 +50,9 @@ def extract_MOPS(img, point):
         [0, 0, 1]], dtype=np.float32)
     
     # rotate to gradient magnitude direction to 0
-    dx, dy = filtering.grad(img)[y, x, :]
+    if grad is None:
+        grad = filtering.grad(img)
+    dx, dy = grad[y, x, :]
     angle = np.arctan2(dy, dx)
     rot = np.array([
         [ np.cos(-angle), np.sin(-angle), 0],
